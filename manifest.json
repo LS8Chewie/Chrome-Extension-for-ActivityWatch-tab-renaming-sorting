@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "ActivityWatch Title Rules",
+  "name": "ActivityWatch Title Helper",
   "description": "Automatically prepend or append custom labels to tab titles based on the current URL.",
   "version": "1.0.0",
 
