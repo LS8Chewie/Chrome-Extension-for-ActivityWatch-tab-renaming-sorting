@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ActivityWatch Title Rules Options</title>
+    <link rel="stylesheet" href="options.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">ActivityWatch helper</p>
+          <h1>Tab title rules</h1>
+          <p class="subtitle">Label tabs automatically so ActivityWatch timelines are easier to scan and categorize.</p>
+        </div>
+        <div class="hero-actions">
+          <label class="theme-toggle" for="darkModeToggle">
+            <input id="darkModeToggle" type="checkbox">
+            <span class="theme-toggle-track" aria-hidden="true">
+              <span class="theme-toggle-thumb"></span>
+            </span>
+            <span>Dark mode</span>
+          </label>
+          <button id="addRuleButton" class="primary-button" type="button">+ Add rule</button>
+        </div>
+      </header>
+
+      <section class="panel preview-panel" aria-labelledby="previewHeading">
+        <div>
+          <h2 id="previewHeading">Live preview</h2>
+          <p>Try a page title and URL to see the first matching enabled rule.</p>
+        </div>
+        <div class="preview-grid">
+          <label>
+            Page title
+            <input id="previewTitle" type="text" value="Quarterly notes">
+          </label>
+          <label>
+            Current URL or domain
+            <input id="previewUrl" type="text" value="https://docs.google.com/document/d/example" placeholder="youtube.com or https://youtube.com/watch?v=example">
+          </label>
+        </div>
+        <div class="preview-actions">
+          <output id="previewOutput" class="preview-output" aria-live="polite"></output>
+          <button id="addPreviewRuleButton" class="secondary-button" type="button">Add preview site as rule</button>
+        </div>
+      </section>
+
+      <section class="toolbar" aria-label="Rule actions">
+        <button id="exportButton" class="secondary-button" type="button">Export JSON</button>
+        <label class="secondary-button file-button">
+          Import JSON
+          <input id="importInput" type="file" accept="application/json,.json">
+        </label>
+        <button id="restoreDefaultsButton" class="ghost-button" type="button">Restore examples</button>
+      </section>
+
+      <section class="panel" aria-labelledby="rulesHeading">
+        <div class="section-heading">
+          <h2 id="rulesHeading">Rules</h2>
+          <p>Rules are checked from top to bottom. Fill one or more match fields; when multiple are filled, all must match.</p>
+        </div>
+        <div id="rulesList" class="rules-list"></div>
+      </section>
+
+      <p id="statusMessage" class="status-message" role="status" aria-live="polite"></p>
+    </main>
+
+    <template id="ruleTemplate">
+      <article class="rule-card">
+        <div class="rule-card-header">
+          <label class="switch-label">
+            <input class="rule-enabled" type="checkbox">
+            <span class="switch" aria-hidden="true"></span>
+            Enabled
+          </label>
+          <button class="icon-button remove-rule" type="button" aria-label="Remove rule">Remove</button>
+        </div>
+
+        <div class="field-grid">
+          <label>
+            Rule name
+            <input class="rule-name" type="text" placeholder="YouTube">
+          </label>
+          <label>
+            Domain contains
+            <input class="rule-domain-pattern" type="text" placeholder="youtube.com">
+          </label>
+          <label>
+            URL contains
+            <input class="rule-url-pattern" type="text" placeholder="/watch">
+          </label>
+          <label class="wide-field">
+            Regex match
+            <input class="rule-regex-pattern" type="text" placeholder="^https://(www\.)?youtube\.com/watch">
+          </label>
+          <label>
+            Mode
+            <select class="rule-mode">
+              <option value="prepend">Prepend</option>
+              <option value="append">Append</option>
+            </select>
+          </label>
+          <label>
+            Text to add
+            <input class="rule-text" type="text" placeholder="[YT]">
+          </label>
+        </div>
+      </article>
+    </template>
+
+    <script src="../scripts/default-rules.js"></script>
+    <script src="../scripts/rule-engine.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>
